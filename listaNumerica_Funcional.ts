@@ -21,7 +21,7 @@ class ListaNumericaFuncional{
 
     public valor_medio(): number|string{
         if(this.verifica_lista){
-            const soma_numeros = (a: number, b: number) => {return a+b}
+            const soma_numeros = (a: number, b: number): number => {return a+b}
             return (this.lista.reduce(soma_numeros, 0)) / (this.lista.length) 
         }
         else return this.mensagem_erro

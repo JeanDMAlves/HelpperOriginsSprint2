@@ -45,7 +45,4 @@ class ListaNumericaImperativa {
             return [this.menor_valor(), this.valor_medio(), this.maior_valor()];
     }
 }
-// Teste do método
-// let numeros = new ListaNumericaImperativa([0,2,3,5,1,4,8,6,7,10,9])
-// console.log(numeros.maior_valor())
 //# sourceMappingURL=listaNumerica_Imperativa.js.map
