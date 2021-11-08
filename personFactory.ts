@@ -2,7 +2,6 @@ import { EnumPessoa } from "./person";
 import { Pessoa } from "./person";
 
 export class FabricaPessoa {
-
     public criaPessoa(pessoa: EnumPessoa): Pessoa{
         if (pessoa === EnumPessoa.Lovelace) return new Lovelace()
         else if (pessoa === EnumPessoa.Turing) return new Turing()
@@ -15,7 +14,7 @@ export class FabricaPessoa {
 
 class Lovelace extends Pessoa {
     constructor() {
-       super(1, 'Ada Lovelace', 'Ada Lovelace, foi uma matemática e escritora inglesa reconhecida por ter escrito o primeiro algoritmo para ser processado por uma máquina')
+        super(1, 'Ada Lovelace', 'Ada Lovelace, foi uma matemática e escritora inglesa reconhecida por ter escrito o primeiro algoritmo para ser processado por uma máquina')
         this.adiciona_invencoes('Linguagem de programação Ada')
     }
 }
@@ -42,8 +41,8 @@ class Copernico extends Pessoa {
 }
 
 // A 
-const fabrica = new FabricaPessoa()
-const ada = fabrica.criaPessoa(EnumPessoa.Lovelace)
+const fabrica: FabricaPessoa = new FabricaPessoa()
+const ada:Lovelace = fabrica.criaPessoa(EnumPessoa.Lovelace)
 
 // B 
 console.log('Quem criou a linguagem de programação Ada?')
