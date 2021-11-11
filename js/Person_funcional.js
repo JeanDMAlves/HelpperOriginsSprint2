@@ -40,18 +40,13 @@ class ListPersonFunctional {
         }
         return transformedList;
     }
-    checkItemExistence(id) {
-        let item = this.list.filter(object => object.getId == id);
-        return item.length !== 0;
-    }
-    itemById(id) {
-        let item = this.list.filter(object => object.getId == id);
-        if (this.checkItemExistence(id))
-            return item[0];
+    findPerson(id) {
+        let item = this.list.find(object => object.getId == id);
+        return item;
     }
     idToOptions(id, option, message) {
-        if (this.checkItemExistence(id)) {
-            let item = this.itemById(id);
+        if (this.findPerson(id)) {
+            let item = this.findPerson(id);
             if (option == 'bio') {
                 if (item.getBio === undefined)
                     return `O ID passado não possui ${message}`;
@@ -78,8 +73,8 @@ class ListPersonFunctional {
     }
     // C
     deleteItem(id) {
-        if (this.checkItemExistence(id)) {
-            let itemIndex = this.list.indexOf(this.itemById(id));
+        if (this.findPerson(id)) {
+            let itemIndex = this.list.indexOf(this.findPerson(id));
             this.list.splice(itemIndex, 1);
             return this.list;
         }
@@ -88,8 +83,8 @@ class ListPersonFunctional {
     }
     // D
     updateItem(id, option, alteration) {
-        if (this.checkItemExistence(id)) {
-            let item = this.list.indexOf(this.itemById(id));
+        if (this.findPerson(id)) {
+            let item = this.list.indexOf(this.findPerson(id));
             if (option.toLowerCase() == 'bio') {
                 this.list[item].replaceBio = alteration;
             }
@@ -104,10 +99,10 @@ class ListPersonFunctional {
     }
 }
 // Testando a classe
-// let test_list = new ListPersonFunctional(list)
-// console.log(test_list.idToName(1))
-// console.log(test_list.idToBio(1))
-// test_list.updateItem(1, 'bio', 'Testando a alteração')
-// console.log(test_list.idToBio(1))
-// console.log(test_list.deleteItem(1))
+let test_list = new ListPersonFunctional(list);
+console.log(test_list.idToName(1));
+console.log(test_list.idToBio(1));
+test_list.updateItem(1, 'bio', 'Testando a alteração');
+console.log(test_list.idToBio(1));
+console.log(test_list.deleteItem(1));
 //# sourceMappingURL=Person_funcional.js.map
