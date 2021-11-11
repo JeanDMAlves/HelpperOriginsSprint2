@@ -1,53 +1,53 @@
-export enum EnumPessoa{
+export enum EnumPerson{
     Lovelace = 'Lovelace',
     Turing = 'Turing',
     Tesla = 'Tesla',
     Copernico = 'Copernico'
 }
 
-export abstract class Pessoa {
+export abstract class Person {
 
-    private id: number
-    private name: string
-    private bio: string
-    private invencoes: Array<string>
+    private id: number;
+    private name: string;
+    private bio: string;
+    private inventions: Array<string>;
 
     constructor(id?: number, name?: string, bio?: string){
-        this.id = id
-        this.name = name
-        this.bio = bio
-        this.invencoes = []
+        this.id = id;
+        this.name = name;
+        this.bio = bio;
+        this.inventions = [];
     }
 
-    public get pega_invencoes(): Array<string>{
-        return this.invencoes
+    public get getInventions(): Array<string>{
+        return this.inventions;
     }
 
-    public get pega_id(): number{
-        return this.id
+    public get getId(): number{
+        return this.id;
     }
 
-    public get pega_bio(): string{
-        return this.bio
+    public get getBio(): string{
+        return this.bio;
     }
     
-    public get pega_name(): string{
-        return this.name
+    public get getName(): string{
+        return this.name;
     }
     
-    public set troca_bio(bio_trocada: string){
-        this.bio = bio_trocada
+    public set updateBio(changes: string){
+        this.bio = changes;
     }
 
-    public set troca_name(name_trocado: string){
-        this.name = name_trocado
+    public set updateName(changes: string){
+        this.name = changes;
     }
 
-    public set troca_id(id: number){
-        this.id = id
+    public set updateId(id: number){
+        this.id = id;
     }
 
-    public adiciona_invencoes(invencao: string){
-        this.invencoes.push(invencao)
+    public addInventions(invention: string){
+        this.inventions.push(invention)
     }
 }

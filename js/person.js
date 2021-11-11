@@ -1,40 +1,40 @@
-export var EnumPessoa;
-(function (EnumPessoa) {
-    EnumPessoa["Lovelace"] = "Lovelace";
-    EnumPessoa["Turing"] = "Turing";
-    EnumPessoa["Tesla"] = "Tesla";
-    EnumPessoa["Copernico"] = "Copernico";
-})(EnumPessoa || (EnumPessoa = {}));
-export class Pessoa {
+export var EnumPerson;
+(function (EnumPerson) {
+    EnumPerson["Lovelace"] = "Lovelace";
+    EnumPerson["Turing"] = "Turing";
+    EnumPerson["Tesla"] = "Tesla";
+    EnumPerson["Copernico"] = "Copernico";
+})(EnumPerson || (EnumPerson = {}));
+export class Person {
     constructor(id, name, bio) {
         this.id = id;
         this.name = name;
         this.bio = bio;
-        this.invencoes = [];
+        this.inventions = [];
     }
-    get pega_invencoes() {
-        return this.invencoes;
+    get getInventions() {
+        return this.inventions;
     }
-    get pega_id() {
+    get getId() {
         return this.id;
     }
-    get pega_bio() {
+    get getBio() {
         return this.bio;
     }
-    get pega_name() {
+    get getName() {
         return this.name;
     }
-    set troca_bio(bio_trocada) {
-        this.bio = bio_trocada;
+    set updateBio(changes) {
+        this.bio = changes;
     }
-    set troca_name(name_trocado) {
-        this.name = name_trocado;
+    set updateName(changes) {
+        this.name = changes;
     }
-    set troca_id(id) {
+    set updateId(id) {
         this.id = id;
     }
-    adiciona_invencoes(invencao) {
-        this.invencoes.push(invencao);
+    addInventions(invention) {
+        this.inventions.push(invention);
     }
 }
 //# sourceMappingURL=person.js.map

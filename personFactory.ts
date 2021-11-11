@@ -1,49 +1,48 @@
-import { EnumPessoa } from "./person";
-import { Pessoa } from "./person";
+import { EnumPerson } from "./person";
+import { Person } from "./person";
 
-export class FabricaPessoa {
-    public criaPessoa(pessoa: EnumPessoa): Pessoa{
-        if (pessoa === EnumPessoa.Lovelace) return new Lovelace()
-        else if (pessoa === EnumPessoa.Turing) return new Turing()
-        else if (pessoa === EnumPessoa.Tesla) return new Tesla()
-        else if (pessoa === EnumPessoa.Copernico) return new Copernico() 
-        else return null
-
+export class PersonFabric {
+    public criaPerson(Person: EnumPerson): Person{
+        if (Person === EnumPerson.Lovelace) return new Lovelace();
+        else if (Person === EnumPerson.Turing) return new Turing();
+        else if (Person === EnumPerson.Tesla) return new Tesla();
+        else if (Person === EnumPerson.Copernico) return new Copernico(); 
+        else return null;
     }
 }
 
-class Lovelace extends Pessoa {
+class Lovelace extends Person {
     constructor() {
-        super(1, 'Ada Lovelace', 'Ada Lovelace, foi uma matemática e escritora inglesa reconhecida por ter escrito o primeiro algoritmo para ser processado por uma máquina')
-        this.adiciona_invencoes('Linguagem de programação Ada')
+        super(1, 'Ada Lovelace', 'Ada Lovelace, foi uma matemática e escritora inglesa reconhecida por ter escrito o primeiro algoritmo para ser processado por uma máquina');
+        this.addInventions('Linguagem de programação Ada');
     }
 }
 
-class Turing extends Pessoa {
+class Turing extends Person {
     constructor() {
-        super(2, 'Alan Turing', 'Alan Turing foi um matemático, cientista da computação, lógico, criptoanalista, filósofo e biólogo teórico britânico, ele é amplamente considerado o pai da ciência da computação teórica e da inteligência artificial')
-        this.adiciona_invencoes('Teste de Turing')
+        super(2, 'Alan Turing', 'Alan Turing foi um matemático, cientista da computação, lógico, criptoanalista, filósofo e biólogo teórico britânico, ele é amplamente considerado o pai da ciência da computação teórica e da inteligência artificial');
+        this.addInventions('Teste de Turing');
     }
 }
 
-class Tesla extends Pessoa {
+class Tesla extends Person {
     constructor() {
-        super(3, 'Nikola Tesla', 'Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada')
-        this.adiciona_invencoes('Motor de Corrente Alternada')
+        super(3, 'Nikola Tesla', 'Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada');
+        this.addInventions('Motor de Corrente Alternada');
     }
 }
 
-class Copernico extends Pessoa {
+class Copernico extends Person {
     constructor() {
-        super(4, 'Nicolau Copérnico', 'Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar')
-        this.adiciona_invencoes('Teoria heliocêntrica')
+        super(4, 'Nicolau Copérnico', 'Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar');
+        this.addInventions('Teoria heliocêntrica');
     }
 }
 
 // A 
-const fabrica: FabricaPessoa = new FabricaPessoa()
-const ada:Lovelace = fabrica.criaPessoa(EnumPessoa.Lovelace)
+const fabrica: PersonFabric = new PersonFabric();
+const ada:Lovelace = fabrica.criaPerson(EnumPerson.Lovelace);
 
 // B 
-console.log('Quem criou a linguagem de programação Ada?')
-console.log(`${ada.pega_name} inventou o seguinte: ${ada.pega_invencoes}` )
+console.log('Quem criou a linguagem de programação Ada?');
+console.log(`${ada.getName} inventou o seguinte: ${ada.getInventions}` );
