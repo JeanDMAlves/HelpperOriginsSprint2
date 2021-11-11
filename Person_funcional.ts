@@ -1,126 +1,127 @@
-export let lista: Array<Object> = [
-    {"id" : 1, "name": "Ada Lovelace", "bio" : "Ada Lovelace, foi uma matemática e escritora inglesa reconhecida por ter escrito o primeiro algoritmo para ser processado por uma máquina"},
-    {"id" : 2, "name": "Alan Turing", "bio" : "Alan Turing foi um matemático, cientista da computação, lógico, criptoanalista, filósofo e biólogo teórico britânico, ele é amplamente considerado o pai da ciência da computação teórica e da inteligência artificia"},
-    {"id" : 3, "name": "Nikola Tesla", "bio" : "Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada."},
-    {"id" : 4, "name": "Nicolau Copérnico", "bio": "Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar."}
+export let list: Array<Object> = [
+    {'id' : 1, 'name': 'Ada Lovelace', 'bio' : 'Ada Lovelace, foi uma matemática e escritora inglesa reconhecida por ter escrito o primeiro algoritmo para ser processado por uma máquina'},
+    {'id' : 2, 'name': 'Alan Turing', 'bio' : 'Alan Turing foi um matemático, cientista da computação, lógico, criptoanalist, filósofo e biólogo teórico britânico, ele é amplamente considerado o pai da ciência da computação teórica e da inteligência artificia'},
+    {'id' : 3, 'name': 'Nikola Tesla', 'bio' : 'Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada.'},
+    {'id' : 4, 'name': 'Nicolau Copérnico', 'bio': 'Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar.'}
 ]
 
 export default class Person{
 
-    private id: number
-    private name: string
-    private bio: string
+    private id: number;
+    private name: string;
+    private bio: string;
 
     constructor(id:number, name:string, bio:string){
-        this.id = id
-        this.name = name
-        this.bio = bio
+        this.id = id;
+        this.name = name;
+        this.bio = bio;
     }
 
-    public get pega_id():number{
-        return this.id
+    public get getId():number{
+        return this.id;
     }
 
-    public get pega_bio():string{
-        return this.bio
+    public get getBio():string{
+        return this.bio;
     }
     
-    public get pega_name():string{
-        return this.name
+    public get getName():string{
+        return this.name;
     }
     
-    public set troca_bio(bio_trocada:string){
-        this.bio = bio_trocada
+    public set replaceBio(bio_trocada:string){
+        this.bio = bio_trocada;
     }
 
-    public set troca_name(name_trocado:string){
-        this.name = name_trocado
+    public set replaceName(name_trocado:string){
+        this.name = name_trocado;
     }
 }
 
-class Lista_person_funcional{
+class ListPersonFunctional{
 
-    private lista: Array<Person>
-    
-    constructor(lista: Array<object>){
-        this.lista = this.transforma_lista(lista)
+    private list: Array<Person>;
+    private messageDoNotExist: string;
+
+    constructor(list: Array<object>){
+        this.list = this.transformList(list);
+        this.messageDoNotExist = 'O item não existe';
     }
 
-    public get pega_lista(){
-        return this.lista
-    }
-
-    private transforma_lista(lista:Array<object>): Array<Person>{
-        let lista_transformada:Array<Person> = []
-        
-        for(let i=0; i<lista.length; i++){
-            let item = lista[i]
-            let pessoa = new Person(item["id"], item["name"], item["bio"])
-            lista_transformada.push(pessoa)
+    private transformList(list:Array<object>): Array<Person>{
+        let transformedList:Array<Person> = [];
+        for(let i=0; i<list.length; i++){
+            let item = list[i];
+            let person = new Person(item['id'], item['name'], item['bio']);
+            transformedList.push(person);
         }
-        return lista_transformada  
+        return transformedList;  
     }
 
-    private verifica_existencia_item(id:number): boolean{
-        let item = this.lista.filter(objeto => objeto.pega_id == id)
-        return item.length !== 0
+    private checkItemExistence(id:number): boolean{
+        let item = this.list.filter(object => object.getId == id);
+        return item.length !== 0;
     }
 
-    private item_por_id(id:number): Person{
-        let item = this.lista.filter(objeto => objeto.pega_id == id)
-        if(this.verifica_existencia_item(id)) return item[0]
+    private itemById(id:number): Person{
+        let item = this.list.filter(object => object.getId == id);
+        if(this.checkItemExistence(id)) return item[0];
+    }
+
+    private idToOptions(id:number, option:string, message:string):string{
+        if(this.checkItemExistence(id)){
+            let item = this.itemById(id)
+            if(option == 'bio') {
+                if(item.getBio === undefined) return `O ID passado não possui ${message}`;
+                else return item.getBio;
+            } 
+            else if(option=='name') {
+                if(item.getName === undefined) return `O ID passado não possui ${message}`;
+                else return item.getName;
+            }
+        }
+        else return this.messageDoNotExist;
     }
 
     // A
-    public id_para_bio(id:number): string{
-        if(this.verifica_existencia_item(id)){
-            let item = this.item_por_id(id).pega_bio
-            if(item === undefined) return "O ID passado não possui biografia"
-            else return item
-        }
-        else return "O item não existe"
+    public idToBio(id:number): string{
+        return this.idToOptions(id, 'bio', 'biografia')
     }
 
     // B
-    public id_para_nome(id: number): string{
-        if(this.verifica_existencia_item(id)){
-            let item = this.item_por_id(id).pega_name
-            if(item === undefined) return "O ID passado não possui nome"
-            else return item
-        }
-        else return "O item não existe"
+    public idToName(id: number): string{
+        return this.idToOptions(id, 'name', 'nome')
     }
 
     // C
-    public apaga_item(id: number){
-        if(this.verifica_existencia_item(id)){
-            let indice_item = this.lista.indexOf(this.item_por_id(id))
-            this.lista.splice(indice_item , 1)
-            return this.lista
+    public deleteItem(id: number){
+        if(this.checkItemExistence(id)){
+            let itemIndex = this.list.indexOf(this.itemById(id));
+            this.list.splice(itemIndex, 1);
+            return this.list;
         }
-        else return "O item não existe"
+        else return this.messageDoNotExist;
     }
 
     // D
-    public altera_item(id: number, opcao: string, alteracao: string){
-        if(this.verifica_existencia_item(id)){
-            let item = this.lista.indexOf(this.item_por_id(id))
+    public updateItem(id: number, option: string, alteration: string){
+        if(this.checkItemExistence(id)){
+            let item = this.list.indexOf(this.itemById(id));
             
-            if(opcao.toLowerCase() == "bio"){ this.lista[item].troca_bio = alteracao }
-            else if (opcao.toLowerCase() == "name"){ this.lista[item].troca_name = alteracao }
-            else return "Opção não reconhecida, opções disponíveis para alteração: bio, name"
+            if(option.toLowerCase() == 'bio'){ this.list[item].replaceBio = alteration; }
+            else if (option.toLowerCase() == 'name'){ this.list[item].replaceName = alteration; }
+            else return 'Opção não reconhecida, opções disponíveis para alteração: bio, name';
         }
-        else return "O item não existe"
+        else return this.messageDoNotExist;
     }
 }
 
 // Testando a classe
-let lista_teste = new Lista_person_funcional(lista)
+// let test_list = new ListPersonFunctional(list)
 
-
-console.log(lista_teste.id_para_nome(1))
-console.log(lista_teste.id_para_bio(1))
-lista_teste.altera_item(1, "bio", "Testando a alteração")
-console.log(lista_teste.id_para_bio(1))
-console.log(lista_teste.apaga_item(1))
+// console.log(test_list.idToName(1))
+// console.log(test_list.idToBio(1))
+// test_list.updateItem(1, 'bio', 'Testando a alteração')
+// console.log(test_list.idToBio(1))
+// console.log(test_list.deleteItem(1))
 

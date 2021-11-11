@@ -1,108 +1,103 @@
-import Person from "./Person_funcional"
-import { lista } from "./Person_funcional"
-class Lista_person_imperativo{
-    private lista: Array<Person>
+import Person from './Person_funcional'
+import { list } from './Person_funcional'
+
+class ListPersonImperative{
+    private list: Array<Person>;
+    private messageDoNotExist: string;
     
-    constructor(lista: Array<object>){
-        this.lista = this.transforma_lista(lista)
+    constructor(list: Array<object>){
+        this.list = this.transformList(list);
+        this.messageDoNotExist = 'O item não existe';
     }
 
-    public get pega_lista(){
-        return this.lista
-    }
-
-    private transforma_lista(lista:Array<object>): Array<Person>{
-        let lista_transformada:Array<Person> = []
+    private transformList(list:Array<object>): Array<Person>{
+        let transformedList:Array<Person> = [];
         
-        for(let i=0; i<lista.length; i++){
-            let item = lista[i]
-            let pessoa = new Person(item["id"], item["name"], item["bio"])
-            lista_transformada.push(pessoa)
+        for(let i=0; i<list.length; i++){
+            let item = list[i];
+            let person = new Person(item['id'], item['name'], item['bio']);
+            transformedList.push(person);
         }
-        return lista_transformada  
+
+        return transformedList;
+    }
+
+    private idToOptions(id:number, options:string, message:string):string{
+        const array: Array<Person> = this.list;
+
+        for(var i:number = 0; i<array.length; i++){
+            let item = array[i]
+            if(item.getId == id){
+
+                if(options=='bio'){
+                    if(item.getBio === undefined) return `O ID passado não possui ${message}`;
+                    else return item.getBio;
+                }
+                else if(options=='name') {
+                    if(item.getName === undefined) return `O ID passado não possui ${message}`;
+                    else return item.getName;
+                }
+
+            }
+        }
+        return this.messageDoNotExist;
     }
 
     // A
-    public id_para_bio(id:number): string{
-        const array: Array<Person> = this.lista
-
-        for(var i:number=0; i<array.length; i++){
-            if(array[i].pega_id == id){
-                let biografia:string = array[i].pega_bio
-                if (biografia == undefined){
-                    return 'Biografia não encontrada'
-                }
-                else{
-                    return biografia
-                }
-            }
-        }
-        return 'Id não encontrado'
+    public idToBio(id:number): string{
+        return this.idToOptions(id, 'bio', 'biografia')
 
     }
 
     // B
-    public id_para_nome(id:number): string{
-        const array: Array<Person> = this.lista
-
-        for(var i: number =0; i<array.length; i++){
-            if(array[i].pega_id == id){
-                let nome:string = array[i].pega_name
-                if (nome == undefined){
-                    return 'Nome não encontrado'
-                }
-                else{
-                    return nome
-                }
-            }
-        }
-        return 'Id não encontrado'
+    public idToName(id:number): string{
+        return this.idToOptions(id, 'name', 'nome')
     }
 
     // C
 
-    public apaga_item(id:number): Array<Person>|string{
-        const array: Array<Person> = this.lista
+    public deleteItem(id:number): Array<Person>|string{
+        const array: Array<Person> = this.list;
 
         for(var i:number=0; i<array.length; i++){
-            if(array[i].pega_id == id){
-                array.splice(i,1)
-                return array
+            if(array[i].getId == id){
+                array.splice(i,1);
+                return array;
             }
         }
-        return 'Id não encontrado'
+        return this.messageDoNotExist;
     }
 
     // D
 
-    public altera_item(id: number, opcao: string, alteracao: string): Array<Person>|string{
-        const array: Array<Person> = this.lista
+    public updateItem(id: number, option: string, alteration: string): Array<Person>|string{
+        const array: Array<Person> = this.list;
 
         for(var i:number=0; i<array.length; i++){
-            let item = array[i]
-            if(item.pega_id == id){
-                if(opcao.toLowerCase() == 'bio'){
-                    item.troca_bio = alteracao
+            let item = array[i];
+            if(item.getId == id){
+                if(option.toLowerCase() == 'bio'){
+                    item.replaceBio = alteration;
                 }
-                else if(opcao.toLowerCase() == 'name'){
-                    item.troca_name = alteracao
+                else if(option.toLowerCase() == 'name'){
+                    item.replaceName = alteration;
                 }
                 else{
-                    return 'Opção não reconhecida, opções disponíveis para alteração: bio, name'
+                    return 'Opção não reconhecida, opções disponíveis para alteração: bio, name';
                 }
-                return array
+                return array;
             }
         }
-        return 'Id não encontrado'
+        return this.messageDoNotExist;
     }
 }
 
 // Testando a classe
-let lista_teste = new Lista_person_imperativo(lista)
+// let list_teste = new ListPersonImperative(list)
 
 
-console.log(lista_teste.id_para_nome(1))
-console.log(lista_teste.id_para_bio(1))
-lista_teste.altera_item(1, "bio", "Testando a alteração")
-console.log(lista_teste.id_para_bio(1))
-console.log(lista_teste.apaga_item(1))
+// console.log(list_teste.idToName(1))
+// console.log(list_teste.idToBio(1))
+// list_teste.updateItem(1, 'bio', 'Testando a alteração')
+// console.log(list_teste.idToBio(1))
+// console.log(list_teste.deleteItem(1))

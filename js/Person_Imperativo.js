@@ -1,75 +1,69 @@
-import Person from "./Person_funcional";
-import { lista } from "./Person_funcional";
-class Lista_person_imperativo {
-    constructor(lista) {
-        this.lista = this.transforma_lista(lista);
+import Person from './Person_funcional';
+class ListPersonImperative {
+    constructor(list) {
+        this.list = this.transformList(list);
+        this.messageDoNotExist = 'O item não existe';
     }
-    get pega_lista() {
-        return this.lista;
-    }
-    transforma_lista(lista) {
-        let lista_transformada = [];
-        for (let i = 0; i < lista.length; i++) {
-            let item = lista[i];
-            let pessoa = new Person(item["id"], item["name"], item["bio"]);
-            lista_transformada.push(pessoa);
+    transformList(list) {
+        let transformedList = [];
+        for (let i = 0; i < list.length; i++) {
+            let item = list[i];
+            let person = new Person(item['id'], item['name'], item['bio']);
+            transformedList.push(person);
         }
-        return lista_transformada;
+        return transformedList;
+    }
+    idToOptions(id, options, message) {
+        const array = this.list;
+        for (var i = 0; i < array.length; i++) {
+            let item = array[i];
+            if (item.getId == id) {
+                if (options == 'bio') {
+                    if (item.getBio === undefined)
+                        return `O ID passado não possui ${message}`;
+                    else
+                        return item.getBio;
+                }
+                else if (options == 'name') {
+                    if (item.getName === undefined)
+                        return `O ID passado não possui ${message}`;
+                    else
+                        return item.getName;
+                }
+            }
+        }
+        return this.messageDoNotExist;
     }
     // A
-    id_para_bio(id) {
-        const array = this.lista;
-        for (var i = 0; i < array.length; i++) {
-            if (array[i].pega_id == id) {
-                let biografia = array[i].pega_bio;
-                if (biografia == undefined) {
-                    return 'Biografia não encontrada';
-                }
-                else {
-                    return biografia;
-                }
-            }
-        }
-        return 'Id não encontrado';
+    idToBio(id) {
+        return this.idToOptions(id, 'bio', 'biografia');
     }
     // B
-    id_para_nome(id) {
-        const array = this.lista;
-        for (var i = 0; i < array.length; i++) {
-            if (array[i].pega_id == id) {
-                let nome = array[i].pega_name;
-                if (nome == undefined) {
-                    return 'Nome não encontrado';
-                }
-                else {
-                    return nome;
-                }
-            }
-        }
-        return 'Id não encontrado';
+    idToName(id) {
+        return this.idToOptions(id, 'name', 'nome');
     }
     // C
-    apaga_item(id) {
-        const array = this.lista;
+    deleteItem(id) {
+        const array = this.list;
         for (var i = 0; i < array.length; i++) {
-            if (array[i].pega_id == id) {
+            if (array[i].getId == id) {
                 array.splice(i, 1);
                 return array;
             }
         }
-        return 'Id não encontrado';
+        return this.messageDoNotExist;
     }
     // D
-    altera_item(id, opcao, alteracao) {
-        const array = this.lista;
+    updateItem(id, option, alteration) {
+        const array = this.list;
         for (var i = 0; i < array.length; i++) {
             let item = array[i];
-            if (item.pega_id == id) {
-                if (opcao.toLowerCase() == 'bio') {
-                    item.troca_bio = alteracao;
+            if (item.getId == id) {
+                if (option.toLowerCase() == 'bio') {
+                    item.replaceBio = alteration;
                 }
-                else if (opcao.toLowerCase() == 'name') {
-                    item.troca_name = alteracao;
+                else if (option.toLowerCase() == 'name') {
+                    item.replaceName = alteration;
                 }
                 else {
                     return 'Opção não reconhecida, opções disponíveis para alteração: bio, name';
@@ -77,14 +71,14 @@ class Lista_person_imperativo {
                 return array;
             }
         }
-        return 'Id não encontrado';
+        return this.messageDoNotExist;
     }
 }
 // Testando a classe
-let lista_teste = new Lista_person_imperativo(lista);
-console.log(lista_teste.id_para_nome(1));
-console.log(lista_teste.id_para_bio(1));
-lista_teste.altera_item(1, "bio", "Testando a alteração");
-console.log(lista_teste.id_para_bio(1));
-console.log(lista_teste.apaga_item(1));
+// let list_teste = new ListPersonImperative(list)
+// console.log(list_teste.idToName(1))
+// console.log(list_teste.idToBio(1))
+// list_teste.updateItem(1, 'bio', 'Testando a alteração')
+// console.log(list_teste.idToBio(1))
+// console.log(list_teste.deleteItem(1))
 //# sourceMappingURL=Person_Imperativo.js.map
