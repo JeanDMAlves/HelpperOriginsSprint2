@@ -1,44 +1,44 @@
-class ListaNumericaFuncional{
-    private lista: Array<number>
-    public verifica_lista: boolean
-    private mensagem_erro: string
+class FunctionalNumericList{
+    private list: Array<number>;
+    public verifyList: boolean;
+    private errorMessage: string;
 
-    constructor(lista: Array<number>){
-        this.lista = lista
-        this.verifica_lista = !(lista.filter((item:number) => {return isNaN(item)}).length > 0)
-        this.mensagem_erro = 'Lista não é inteiramente numérica'
+    constructor(list: Array<number>){
+        this.list = list;
+        this.verifyList = !(list.filter((item:number) => {return isNaN(item)}).length > 0);
+        this.errorMessage = 'lista não é inteiramente numérica';
     }
 
-    public maior_valor(): number|string{
-        if(this.verifica_lista) return this.lista.reduce((a,b) => {return Math.max(a,b)})
-        else return this.mensagem_erro
+    public highestValue(): number|string{
+        if(this.verifyList) return this.list.reduce((a,b) => {return Math.max(a,b)});
+        else return this.errorMessage;
     }
     
-    public menor_valor(): number|string{
-        if(this.verifica_lista) return this.lista.reduce((a,b) => {return Math.min(a,b)})
-        else return this.mensagem_erro
+    public lowestValue(): number|string{
+        if(this.verifyList) return this.list.reduce((a,b) => {return Math.min(a,b)});
+        else return this.errorMessage;
     }
 
-    public valor_medio(): number|string{
-        if(this.verifica_lista){
-            const soma_numeros = (a: number, b: number): number => {return a+b}
-            return (this.lista.reduce(soma_numeros, 0)) / (this.lista.length) 
+    public averageValue(): number|string{
+        if(this.verifyList){
+            const addNumbers = (a: number, b: number): number => {return a+b};
+            return (this.list.reduce(addNumbers, 0)) / (this.list.length);
         }
-        else return this.mensagem_erro
+        else return this.errorMessage;
     }
 
-    public valores_relevantes(){
-        if(this.verifica_lista) return [this.menor_valor(), this.valor_medio(), this.maior_valor()]
-        else return this.mensagem_erro
+    public importantValues(){
+        if(this.verifyList) return [this.lowestValue(), this.averageValue(), this.highestValue()];
+        else return this.errorMessage;
     }
 
-    public get pega_lista(): Array<number>{
-        return this.lista
+    public get getList(): Array<number>{
+        return this.list;
     }
 
 }
 
 // Teste do método 
 
-// let numeros = new ListaNumericaFuncional([0,2,3,5,1,4,8,6,7,10,9])
-// console.log(numeros.valores_relevantes())
+// let numeros = new FunctionalNumericList([0,2,3,5,1,4,8,6,7,10,9])
+// console.log(numeros.importantValues())

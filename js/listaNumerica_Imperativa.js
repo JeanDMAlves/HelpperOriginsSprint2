@@ -1,48 +1,50 @@
-class ListaNumericaImperativa {
-    constructor(lista) {
-        lista.sort(this.ordena_lista);
-        this.lista = lista;
-        this.mensagem_erro = 'Lista não é inteiramente numérica';
+class ImperativeNumericList {
+    constructor(list) {
+        list.sort(this.sortList);
+        this.list = list;
+        this.errorMessage = 'lista não é inteiramente numérica';
     }
-    ordena_lista(a, b) {
+    sortList(a, b) {
         if (a > b)
             return 1;
         else if (a < b)
             return -1;
         return 0;
     }
-    verifica_lista() {
-        for (let item of this.lista) {
+    verifyList() {
+        for (let item of this.list) {
             if (isNaN(item))
-                return this.mensagem_erro;
+                return this.errorMessage;
         }
     }
-    maior_valor() {
-        if (this.verifica_lista() !== this.mensagem_erro)
-            return this.lista[this.lista.length - 1];
+    highestValue() {
+        if (this.verifyList() !== this.errorMessage)
+            return this.list[this.list.length - 1];
         else
-            return this.mensagem_erro;
+            return this.errorMessage;
     }
-    menor_valor() {
-        if (this.verifica_lista() !== this.mensagem_erro)
-            return this.lista[0];
+    lowestValue() {
+        if (this.verifyList() !== this.errorMessage)
+            return this.list[0];
         else
-            return this.mensagem_erro;
+            return this.errorMessage;
     }
-    valor_medio() {
-        if (this.verifica_lista() !== this.mensagem_erro) {
-            let acumulador = 0;
-            for (let i = 0; i < this.lista.length; i++) {
-                acumulador += this.lista[i];
+    averageValue() {
+        if (this.verifyList() !== this.errorMessage) {
+            let accumulator = 0;
+            for (let i = 0; i < this.list.length; i++) {
+                accumulator += this.list[i];
             }
-            return (acumulador / (this.lista.length));
+            return (accumulator / (this.list.length));
         }
         else
-            return this.mensagem_erro;
+            return this.errorMessage;
     }
-    valores_relevantes() {
-        if (this.verifica_lista() !== this.mensagem_erro)
-            return [this.menor_valor(), this.valor_medio(), this.maior_valor()];
+    importantValues() {
+        if (this.verifyList() !== this.errorMessage)
+            return [this.lowestValue(), this.averageValue(), this.highestValue()];
     }
 }
+// let numbers = new ImperativeNumericList([0,2,3,5,1,4,8,6,7,10,9])
+// console.log(numbers.importantValues())
 //# sourceMappingURL=listaNumerica_Imperativa.js.map
