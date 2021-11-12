@@ -34,7 +34,4 @@ class FunctionalNumericList {
         return this.list;
     }
 }
-// Teste do método 
-// let numeros = new FunctionalNumericList([0,2,3,5,1,4,8,6,7,10,9])
-// console.log(numeros.importantValues())
 //# sourceMappingURL=listaNumerica_Funcional.js.map

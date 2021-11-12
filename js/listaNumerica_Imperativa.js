@@ -45,6 +45,4 @@ class ImperativeNumericList {
             return [this.lowestValue(), this.averageValue(), this.highestValue()];
     }
 }
-// let numbers = new ImperativeNumericList([0,2,3,5,1,4,8,6,7,10,9])
-// console.log(numbers.importantValues())
 //# sourceMappingURL=listaNumerica_Imperativa.js.map
