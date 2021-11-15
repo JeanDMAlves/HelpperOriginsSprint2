@@ -41,7 +41,12 @@ class ImperativeNumericList{
         else return this.errorMessage;
     }
 
-    public importantValues():[number|string, number|string, number|string]{
-        if(this.verifyList() !== this.errorMessage) return [this.lowestValue(), this.averageValue(), this.highestValue()];
+    public importantValues(){
+        if(this.verifyList() !== this.errorMessage){ 
+            console.log(`O menor valor é: ${this.lowestValue()}, o valor médio é: ${this.averageValue()}, o maior valor é: ${this.highestValue()}`);
+        }
     }
 }
+// Testes
+// let numeros = new ImperativeNumericList([0,2,3,5,1,4,8,6,7,10,9])
+// numeros.importantValues()

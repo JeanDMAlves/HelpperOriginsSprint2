@@ -28,12 +28,13 @@ class FunctionalNumericList{
     }
 
     public importantValues(){
-        if(this.verifyList) return [this.lowestValue(), this.averageValue(), this.highestValue()];
+        if(this.verifyList){ 
+            console.log(`O menor valor é: ${this.lowestValue()}, o valor médio é: ${this.averageValue()}, o maior valor é: ${this.highestValue()}`)
+        }
         else return this.errorMessage;
     }
-
-    public get getList(): Array<number>{
-        return this.list;
-    }
-
 }
+
+// Testes
+// let numeros = new FunctionalNumericList([0,2,3,5,1,4,8,6,7,10,9])
+// numeros.importantValues()
