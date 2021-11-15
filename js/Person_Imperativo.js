@@ -1,17 +1,29 @@
-import Person from './Person_funcional';
+class Person1 {
+    constructor(id, name, bio) {
+        this.id = id;
+        this.name = name;
+        this.bio = bio;
+    }
+    get getId() {
+        return this.id;
+    }
+    get getBio() {
+        return this.bio;
+    }
+    get getName() {
+        return this.name;
+    }
+    set replaceBio(bio_trocada) {
+        this.bio = bio_trocada;
+    }
+    set replaceName(name_trocado) {
+        this.name = name_trocado;
+    }
+}
 class ListPersonImperative {
     constructor(list) {
-        this.list = this.transformList(list);
+        this.list = list;
         this.messageDoNotExist = 'O item não existe';
-    }
-    transformList(list) {
-        let transformedList = [];
-        for (let i = 0; i < list.length; i++) {
-            let item = list[i];
-            let person = new Person(item['id'], item['name'], item['bio']);
-            transformedList.push(person);
-        }
-        return transformedList;
     }
     idToOptions(id, options, message) {
         const array = this.list;
@@ -74,11 +86,17 @@ class ListPersonImperative {
         return this.messageDoNotExist;
     }
 }
+let list1 = [
+    new Person1(1, 'Ada Lovelace', 'Ada Lovelace, foi uma matemática e escritora inglesa reconhecida por ter escrito o primeiro algoritmo para ser processado por uma máquina'),
+    new Person1(2, 'Alan Turing', 'Alan Turing foi um matemático, cientista da computação, lógico, criptoanalist, filósofo e biólogo teórico britânico, ele é amplamente considerado o pai da ciência da computação teórica e da inteligência artificia'),
+    new Person1(3, 'Nikola Tesla', 'Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada.'),
+    new Person1(4, 'Nicolau Copérnico', 'Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar.')
+];
 // Testando a classe
-// let list_teste = new ListPersonImperative(list)
-// console.log(list_teste.idToName(1))
-// console.log(list_teste.idToBio(1))
-// list_teste.updateItem(1, 'bio', 'Testando a alteração')
-// console.log(list_teste.idToBio(1))
-// console.log(list_teste.deleteItem(1))
+// let test_list = new ListPersonImperative(list1)
+// console.log(test_list.idToName(1))
+// console.log(test_list.idToBio(1))
+// test_list.updateItem(1, 'bio', 'Testando a alteração')
+// console.log(test_list.idToBio(1))
+// console.log(test_list.deleteItem(1))
 //# sourceMappingURL=Person_Imperativo.js.map

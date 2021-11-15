@@ -1,11 +1,9 @@
-export let list: Array<Object> = [
-    {'id' : 1, 'name': 'Ada Lovelace', 'bio' : 'Ada Lovelace, foi uma matemática e escritora inglesa reconhecida por ter escrito o primeiro algoritmo para ser processado por uma máquina'},
-    {'id' : 2, 'name': 'Alan Turing', 'bio' : 'Alan Turing foi um matemático, cientista da computação, lógico, criptoanalist, filósofo e biólogo teórico britânico, ele é amplamente considerado o pai da ciência da computação teórica e da inteligência artificia'},
-    {'id' : 3, 'name': 'Nikola Tesla', 'bio' : 'Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada.'},
-    {'id' : 4, 'name': 'Nicolau Copérnico', 'bio': 'Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar.'}
-]
-
-export default class Person{
+interface PersonMolde{
+    id:number;
+    name:string;
+    bio:string;
+}
+class Person{
 
     private id: number;
     private name: string;
@@ -43,29 +41,20 @@ class ListPersonFunctional{
     private list: Array<Person>;
     private messageDoNotExist: string;
 
-    constructor(list: Array<object>){
-        this.list = this.transformList(list);
+    constructor(list: Array<Person>){
+        this.list = list;
         this.messageDoNotExist = 'O item não existe';
     }
 
-    private transformList(list:Array<object>): Array<Person>{
-        let transformedList:Array<Person> = [];
-        for(let i=0; i<list.length; i++){
-            let item = list[i];
-            let person = new Person(item['id'], item['name'], item['bio']);
-            transformedList.push(person);
-        }
-        return transformedList;  
-    }
-
     private findPerson(id:number): Person{
-        let item: Person = this.list.find(object => object.getId == id);
-        return item;
+        let item = this.list.find(object => object.getId == id);
+        if(item) return item;
+        else throw 'O item não existe'
     }
 
-    private idToOptions(id:number, option:string, message:string):string{
-        if(this.findPerson(id)){
-            let item = this.findPerson(id)
+    private idToOptions(id:number, option:string, message:string): string{
+        let item = this.findPerson(id)
+        if(item){
             if(option == 'bio') {
                 if(item.getBio === undefined) return `O ID passado não possui ${message}`;
                 else return item.getBio;
@@ -75,7 +64,7 @@ class ListPersonFunctional{
                 else return item.getName;
             }
         }
-        else return this.messageDoNotExist;
+        throw 'O item não existe'; 
     }
 
     // A
@@ -111,12 +100,18 @@ class ListPersonFunctional{
     }
 }
 
+let list: Array<Person> = [
+    new Person(1, 'Ada Lovelace', 'Ada Lovelace, foi uma matemática e escritora inglesa reconhecida por ter escrito o primeiro algoritmo para ser processado por uma máquina'),
+    new Person(2, 'Alan Turing', 'Alan Turing foi um matemático, cientista da computação, lógico, criptoanalist, filósofo e biólogo teórico britânico, ele é amplamente considerado o pai da ciência da computação teórica e da inteligência artificia'), 
+    new Person(3, 'Nikola Tesla', 'Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada.'),
+    new Person(4, 'Nicolau Copérnico', 'Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar.') 
+]
+
 // Testando a classe
-let test_list = new ListPersonFunctional(list)
+// let test_list = new ListPersonFunctional(list)
 
-console.log(test_list.idToName(1))
-console.log(test_list.idToBio(1))
-test_list.updateItem(1, 'bio', 'Testando a alteração')
-console.log(test_list.idToBio(1))
-console.log(test_list.deleteItem(1))
-
+// console.log(test_list.idToName(1))
+// console.log(test_list.idToBio(1))
+// test_list.updateItem(1, 'bio', 'Testando a alteração')
+// console.log(test_list.idToBio(1))
+// console.log(test_list.deleteItem(1))
