@@ -1,5 +1,5 @@
-import { EnumPerson } from "./person";
-import { Person } from "./person";
+import { EnumPerson } from "./person.js";
+import Person from "./person.js";
 export class PersonFabric {
     criaPerson(Person) {
         if (Person === EnumPerson.Lovelace)

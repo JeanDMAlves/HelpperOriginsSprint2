@@ -5,7 +5,7 @@ export var EnumPerson;
     EnumPerson["Tesla"] = "Tesla";
     EnumPerson["Copernico"] = "Copernico";
 })(EnumPerson || (EnumPerson = {}));
-export class Person {
+export default class Person {
     constructor(id, name, bio) {
         this.id = id;
         this.name = name;
@@ -37,4 +37,6 @@ export class Person {
         this.inventions.push(invention);
     }
 }
+
+
 //# sourceMappingURL=person.js.map
