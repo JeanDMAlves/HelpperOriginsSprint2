@@ -1,7 +1,58 @@
-import { EnumPerson } from "./person";
-import { Person } from "./person";
+enum EnumPerson{
+    Lovelace = 'Lovelace',
+    Turing = 'Turing',
+    Tesla = 'Tesla',
+    Copernico = 'Copernico'
+}
 
-export class PersonFabric {
+abstract class Person {
+
+    private id: number;
+    private name: string;
+    private bio: string;
+    private inventions: Array<string>;
+
+    constructor(id?: number, name?: string, bio?: string){
+        this.id = id;
+        this.name = name;
+        this.bio = bio;
+        this.inventions = [];
+    }
+
+    public get getInventions(): Array<string>{
+        return this.inventions;
+    }
+
+    public get getId(): number{
+        return this.id;
+    }
+
+    public get getBio(): string{
+        return this.bio;
+    }
+    
+    public get getName(): string{
+        return this.name;
+    }
+    
+    public set updateBio(changes: string){
+        this.bio = changes;
+    }
+
+    public set updateName(changes: string){
+        this.name = changes;
+    }
+
+    public set updateId(id: number){
+        this.id = id;
+    }
+
+    public addInventions(invention: string){
+        this.inventions.push(invention)
+    }
+}
+
+class PersonFabric {
     public criaPerson(Person: EnumPerson): Person{
         if (Person === EnumPerson.Lovelace) return new Lovelace();
         else if (Person === EnumPerson.Turing) return new Turing();
@@ -45,4 +96,4 @@ const ada:Lovelace = fabrica.criaPerson(EnumPerson.Lovelace);
 
 // B 
 console.log('Quem criou a linguagem de programação Ada?');
-console.log(`${ada.getName} inventou o seguinte: ${ada.getInventions}` );
+console.log(`${ada.getName} inventou o seguinte: ${ada.getInventions}`);
